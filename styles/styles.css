@@ -1,0 +1,538 @@
+/* Import Google Font - Inter */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+/* Define Color Variables for easy customization */
+:root {
+    /* Primary Accent Color: A deep, professional forest green */
+    --primary-color: #1a7a4c; /* Dark Green */
+    --primary-hover-color: #145e3b; /* Slightly darker green for hover states */
+
+    /* Text Colors */
+    --text-color: #343a40; /* Dark Charcoal - for main body text, good readability */
+    --heading-color: #212529; /* Even darker for headings, strong contrast */
+    --muted-text-color: #6c757d; /* Soft Gray - for secondary text like descriptions, dates */
+
+    /* Background Colors */
+    --light-bg: #f5f7f9; /* Very light subtle gray, for alternating section backgrounds */
+    --white-bg: #ffffff; /* Pure white, for primary section backgrounds and cards */
+
+    /* Border & Separator Colors */
+    --border-color: #e2e6e9; /* Light gray for subtle borders and timeline lines */
+
+    /* Shadow Colors */
+    --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.04); /* Very subtle shadow for a clean lift */
+    --shadow-hover: 0 8px 20px rgba(0, 0, 0, 0.08); /* Slightly more pronounced on hover */
+}
+
+/* Base Styles: Apply to the entire body for consistent typography and background */
+body {
+    font-family: 'Inter', sans-serif; /* Use the imported Inter font */
+    line-height: 1.6; /* Standard line height for readability */
+    color: var(--text-color); /* Apply the main text color */
+    background-color: var(--light-bg); /* Use the light background color for the overall page */
+    scroll-behavior: smooth; /* Enable smooth scrolling when navigating to anchor links */
+    overflow-x: hidden; /* Prevent horizontal scrollbars, especially important for animations */
+}
+
+/* Headings: Consistent styling for all heading levels */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--heading-color); /* Apply the darker heading color */
+    font-weight: 700; /* Bold font weight for emphasis */
+    margin-bottom: 1rem; /* Standard bottom margin */
+}
+
+/* Specific font sizes for different heading levels */
+h1 { font-size: 2.8rem; }
+h2 { font-size: 2.2rem; }
+h3 { font-size: 1.8rem; }
+h4 { font-size: 1.5rem; }
+
+/* Navbar Styling: Fixed at the top with subtle shadow */
+.navbar {
+    background-color: var(--white-bg); /* White background for a clean look */
+    box-shadow: var(--shadow-light); /* Subtle shadow for depth */
+    padding: 1rem 0; /* Vertical padding */
+    position: sticky; /* Makes the navbar stick to the top when scrolling */
+    top: 0; /* Position at the very top */
+    z-index: 1000; /* Ensure navbar stays on top of other content */
+}
+
+.navbar ul {
+    list-style: none; /* Remove bullet points from list items */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+    display: flex; /* Use flexbox for horizontal layout */
+    justify-content: center; /* Center the navigation links */
+}
+
+.navbar li {
+    margin: 0 20px; /* Horizontal spacing between list items */
+}
+
+.navbar .nav-link {
+    color: var(--text-color); /* Default link color */
+    text-decoration: none; /* Remove underline */
+    font-weight: 500; /* Medium font weight */
+    padding: 0.5rem 0; /* Vertical padding for click area */
+    position: relative; /* Needed for the underline animation */
+    transition: color 0.3s ease; /* Smooth color transition on hover */
+}
+
+/* Underline effect for navigation links (pseudo-element) */
+.navbar .nav-link::after {
+    content: ''; /* Required for pseudo-elements */
+    position: absolute; /* Position relative to the parent link */
+    width: 0; /* Start with no width */
+    height: 2px; /* Thickness of the underline */
+    background-color: var(--primary-color); /* Color of the underline */
+    left: 50%; /* Start from the center */
+    bottom: -5px; /* Position below the text */
+    transform: translateX(-50%); /* Center the underline */
+    transition: width 0.3s ease; /* Smooth width transition for the animation */
+}
+
+/* Hover state for navigation links */
+.navbar .nav-link:hover {
+    color: var(--primary-color); /* Change color on hover */
+}
+
+/* Expand underline on hover and for the active link */
+.navbar .nav-link:hover::after,
+.navbar .nav-link.active::after {
+    width: 100%; /* Expand underline to full width */
+}
+
+/* Active state for the current section's navigation link */
+.navbar .nav-link.active {
+    color: var(--primary-color); /* Primary color for active link */
+    font-weight: 600; /* Slightly bolder for active link */
+}
+
+/* Section Styling: Common properties for all content sections */
+section {
+    padding: 100px 0; /* Generous vertical padding for visual separation */
+    opacity: 0; /* Initially hidden for fade-in animation */
+    transform: translateY(20px); /* Initially moved down for slide-up effect */
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out; /* Smooth animation properties */
+}
+
+/* Class added by JavaScript when section enters viewport for animation */
+section.fade-in {
+    opacity: 1; /* Fully visible */
+    transform: translateY(0); /* Return to original position */
+}
+
+/* Home Section: Hero area with profile image and introduction */
+#home {
+    background-color: var(--white-bg); /* White background for a crisp look */
+    padding-top: 150px; /* Extra padding to account for fixed navbar */
+    padding-bottom: 100px;
+}
+
+#home .profile-img {
+    width: 200px; /* Fixed width */
+    height: 200px; /* Fixed height */
+    border-radius: 50%; /* Make the image circular */
+    object-fit: cover; /* Ensure image covers the area without distortion */
+    border: 5px solid var(--primary-color); /* Primary color border around the image */
+    box-shadow: var(--shadow-hover); /* More pronounced shadow for the profile image */
+    margin-bottom: 30px; /* Space below the image */
+}
+
+#home h1 {
+    font-size: 3.2rem; /* Larger font size for the main name */
+    font-weight: 800; /* Extra bold for strong impact */
+    line-height: 1.2; /* Slightly tighter line height for large text */
+}
+
+#home .lead {
+    font-size: 1.4rem; /* Larger font for the lead paragraph (role) */
+    color: var(--primary-color); /* Primary color for the role text */
+    font-weight: 600; /* Bolder font weight */
+    margin-bottom: 25px; /* Space below the lead text */
+}
+
+#home p {
+    font-size: 1.1rem; /* Standard paragraph font size */
+    color: var(--muted-text-color); /* Muted text color for general paragraphs */
+}
+
+/* Button Styling: Consistent look for all buttons */
+.btn {
+    padding: 12px 28px; /* Vertical and horizontal padding */
+    border-radius: 6px; /* Slightly rounded corners */
+    font-weight: 600; /* Bolder text */
+    transition: all 0.3s ease; /* Smooth transitions for all properties */
+    text-transform: uppercase; /* Uppercase text for a professional touch */
+    letter-spacing: 0.5px; /* Slight letter spacing */
+}
+
+.btn-primary {
+    background-color: var(--primary-color); /* Primary background color */
+    border-color: var(--primary-color); /* Primary border color */
+    color: var(--white-bg); /* White text color */
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover-color); /* Darker primary color on hover */
+    border-color: var(--primary-hover-color); /* Darker border color on hover */
+    transform: translateY(-2px); /* Slight lift effect on hover */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15); /* More prominent shadow on hover */
+}
+
+.btn-outline-primary {
+    color: var(--primary-color); /* Primary text color for outline buttons */
+    border-color: var(--primary-color); /* Primary border color for outline buttons */
+    background-color: transparent; /* Transparent background */
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--primary-color); /* Primary background color on hover */
+    color: var(--white-bg); /* White text color on hover */
+    transform: translateY(-2px); /* Slight lift effect on hover */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* Subtle shadow on hover */
+}
+
+/* Progress Bar Styling (for skills section) */
+/* List-Based Skills Styling */
+.skills-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 1.5rem;
+}
+
+.skills-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 18px;
+    background-color: var(--white-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: var(--shadow-light);
+    margin-bottom: 10px;
+    font-weight: 500;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.skills-list li:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
+}
+
+.skills-list .skill-label {
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+.skills-list .skill-level {
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 4px 12px;
+    font-size: 0.85rem;
+    border-radius: 20px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+
+/* Projects Section Styling */
+#projects {
+    background-color: var(--light-bg); /* Light background for this section */
+}
+
+.project-card {
+    border: none; /* Remove default card borders */
+    border-radius: 10px; /* Rounded corners for the cards */
+    overflow: hidden; /* Hide content that overflows rounded corners */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions for hover effects */
+    height: 100%; /* Ensure all cards in a row have the same height */
+    background-color: var(--white-bg); /* White background for the cards */
+    box-shadow: var(--shadow-light); /* Subtle shadow for depth */
+}
+
+.project-card:hover {
+    transform: translateY(-8px); /* Lift the card significantly on hover */
+    box-shadow: var(--shadow-hover); /* More pronounced shadow on hover */
+}
+
+.project-card .card-img-top {
+    height: 200px; /* Fixed height for project images */
+    object-fit: cover; /* Ensure images cover the area without distortion */
+}
+
+.project-card .card-body {
+    padding: 25px; /* Padding inside the card body */
+}
+
+.project-card .card-title {
+    font-size: 1.35rem; /* Font size for project titles */
+    font-weight: 600; /* Bolder font weight */
+    margin-bottom: 10px; /* Space below the title */
+}
+
+.project-card .card-text {
+    font-size: 0.95rem; /* Font size for project descriptions */
+    color: var(--muted-text-color); /* Muted text color for descriptions */
+}
+
+.badge {
+    padding: 7px 12px; /* Padding for badges */
+    font-weight: 500; /* Medium font weight */
+    border-radius: 5px; /* Rounded corners for badges */
+    font-size: 0.85em; /* Smaller font size relative to parent */
+    text-transform: uppercase; /* Uppercase text for badges */
+}
+.badge.bg-primary {
+    background-color: var(--primary-color) !important; /* Apply primary color to primary badges */
+}
+.badge.bg-secondary {
+    background-color: var(--muted-text-color) !important; /* Apply muted text color to secondary badges */
+}
+
+/* Experience Section Styling (Timeline) */
+#experience {
+    background-color: var(--white-bg); /* White background for this section */
+}
+
+.timeline {
+    position: relative; /* Needed for positioning the ::before pseudo-element */
+    max-width: 900px; /* Maximum width for the timeline container */
+    margin: 0 auto; /* Center the timeline */
+    padding-left: 40px; /* Space for the vertical timeline line */
+}
+
+/* Vertical line for the timeline */
+.timeline::before {
+    content: ''; /* Required for pseudo-elements */
+    position: absolute; /* Position relative to the timeline container */
+    left: 15px; /* Position of the line */
+    top: 0;
+    bottom: 0;
+    width: 2px; /* Thickness of the line */
+    background: var(--border-color); /* Color of the line */
+}
+
+.timeline-item {
+    position: relative; /* Needed for positioning the ::before pseudo-element */
+    margin-bottom: 40px; /* Space between timeline items */
+    padding: 25px; /* Padding inside each timeline item */
+    background-color: var(--white-bg); /* White background for items */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: var(--shadow-light); /* Subtle shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effects */
+}
+
+.timeline-item:hover {
+    transform: translateY(-5px); /* Slight lift on hover */
+    box-shadow: var(--shadow-hover); /* More pronounced shadow on hover */
+}
+
+/* Dot icon for each timeline item */
+.timeline-item::before {
+    content: ''; /* Required for pseudo-elements */
+    position: absolute; /* Position relative to the timeline item */
+    left: -29px; /* Adjust to align with the main timeline line */
+    top: 35px; /* Vertical position of the dot */
+    width: 16px; /* Size of the dot */
+    height: 16px; /* Size of the dot */
+    border-radius: 50%; /* Make it circular */
+    background: var(--primary-color); /* Primary color for the dot */
+    border: 4px solid var(--white-bg); /* White ring around the dot */
+}
+
+.timeline-item h4 {
+    font-size: 1.3rem; /* Font size for job titles */
+    margin-bottom: 5px; /* Space below title */
+}
+
+.timeline-item h5 {
+    font-size: 1.1rem; /* Font size for company names */
+    color: var(--primary-color); /* Primary color for company names */
+    margin-bottom: 10px; /* Space below company name */
+}
+
+.timeline-item p {
+    color: var(--muted-text-color); /* Muted text color for dates */
+    font-size: 0.95rem; /* Smaller font size */
+}
+
+.timeline-item ul {
+    list-style-type: disc; /* Use disc bullets for list items */
+    padding-left: 20px; /* Indent list items */
+    margin-top: 15px; /* Space above the list */
+    color: var(--text-color); /* Standard text color for list items */
+}
+
+.timeline-item ul li {
+    margin-bottom: 8px; /* Space between list items */
+}
+
+/* Education Section Styling */
+#education {
+    background-color: var(--light-bg); /* Light background for this section */
+}
+
+#education .card {
+    border: none; /* Remove default card borders */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: var(--shadow-light); /* Subtle shadow */
+    background-color: var(--white-bg); /* White background for cards */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effects */
+    height: 100%; /* Ensure cards are same height */
+}
+
+#education .card:hover {
+    transform: translateY(-5px); /* Slight lift on hover */
+    box-shadow: var(--shadow-hover); /* More pronounced shadow on hover */
+}
+
+#education .card-body {
+    padding: 30px; /* Padding inside card body */
+}
+
+#education .card-title {
+    font-size: 1.4rem; /* Font size for degree titles */
+    font-weight: 600; /* Bolder font weight */
+}
+
+#education .card-subtitle {
+    font-size: 1.1rem; /* Font size for institution names */
+    color: var(--primary-color) !important; /* Primary color for institution names */
+}
+
+#education .card p {
+    color: var(--muted-text-color); /* Muted text color for descriptions */
+    font-size: 0.95rem; /* Smaller font size */
+}
+
+/* Contact Section Styling */
+#contact {
+    background-color: var(--white-bg); /* White background for this section */
+}
+
+.contact-info-container {
+    background-color: var(--light-bg); /* Light background for the contact info box */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: var(--shadow-light); /* Subtle shadow */
+    padding: 40px; /* Padding inside the container */
+}
+
+.contact-info-item {
+    padding: 20px; /* Padding inside each contact info item */
+    transition: transform 0.3s ease; /* Smooth lift on hover */
+}
+
+.contact-info-item:hover {
+    transform: translateY(-5px); /* Slight lift on hover */
+}
+
+.icon-container {
+    width: 70px; /* Fixed width */
+    height: 70px; /* Fixed height */
+    margin: 0 auto 20px auto; /* Center the icon and add bottom margin */
+    display: flex; /* Use flexbox to center the icon inside */
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+    background-color: rgba(26, 122, 76, 0.1); /* Light transparent primary color background */
+    border-radius: 50%; /* Make it circular */
+    color: var(--primary-color); /* Primary color for the icon itself */
+}
+
+.icon-container .fa-2x {
+    font-size: 2.2em; /* Slightly larger icons */
+}
+
+.contact-info-item h5 {
+    font-size: 1.25rem; /* Font size for contact headings (e.g., "Location") */
+    margin-bottom: 8px; /* Space below heading */
+    color: var(--heading-color); /* Darker color for these headings */
+}
+
+.contact-info-item p {
+    margin-bottom: 5px; /* Space between contact details */
+    color: var(--muted-text-color); /* Muted text color for contact details */
+    font-size: 0.95rem; /* Smaller font size */
+}
+
+.social-icons a {
+    color: var(--text-color); /* Default color for social icons */
+    transition: color 0.3s ease, transform 0.3s ease; /* Smooth transitions for hover effects */
+    display: inline-block; /* Allows transform properties */
+    font-size: 2.5em; /* Larger social icons */
+    margin: 0 12px; /* Horizontal spacing between icons */
+}
+
+.social-icons a:hover {
+    color: var(--primary-color); /* Primary color on hover */
+    transform: translateY(-5px); /* Lift effect on hover */
+}
+
+/* Footer Styling */
+footer {
+    background-color: #212529; /* Very dark gray for the footer background */
+    color: var(--light-bg); /* Light text color for contrast */
+    padding: 25px 0; /* Vertical padding */
+    font-size: 0.9rem; /* Smaller font size */
+    text-align: center; /* Center the text */
+}
+
+/* Media Queries for Responsiveness: Adjust styles for different screen sizes */
+
+/* Large devices (desktops, 992px and up) */
+@media (max-width: 992px) {
+    #home .col-lg-6:first-child {
+        text-align: center; /* Center text in the first column of home section */
+    }
+    #home .ps-lg-5 {
+        padding-left: 0 !important; /* Remove left padding on smaller screens */
+        text-align: center; /* Center text in the second column of home section */
+        margin-top: 50px !important; /* Add top margin if content is stacked */
+    }
+    .profile-img {
+        margin: 0 auto 30px auto; /* Center the profile image */
+    }
+    .btn {
+        width: auto; /* Allow buttons to size naturally */
+        display: inline-block; /* Ensure buttons display inline */
+    }
+    .timeline {
+        padding-left: 15px; /* Adjust timeline padding for smaller screens */
+    }
+    .timeline::before {
+        left: 0; /* Align timeline line to the left edge */
+    }
+    .timeline-item::before {
+        left: -14px; /* Adjust dot position to align with the new line position */
+        top: 25px; /* Adjust vertical position of the dot */
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (max-width: 768px) {
+    h1 { font-size: 2.2rem; } /* Adjust heading sizes */
+    h2 { font-size: 1.8rem; }
+    section { padding: 80px 0; } /* Reduce section padding */
+    .navbar li { margin: 0 10px; } /* Reduce spacing in navbar */
+    .contact-info-item { margin-bottom: 30px; } /* Add bottom margin for stacked contact items */
+    .contact-info-item:last-child { margin-bottom: 0; } /* Remove margin from the last item */
+}
+
+/* Small devices (phones, 576px and up) */
+@media (max-width: 576px) {
+    .navbar ul {
+        flex-wrap: wrap; /* Allow navigation links to wrap to the next line */
+        gap: 10px; /* Add gap between wrapped items */
+    }
+    .navbar li {
+        margin: 0 5px; /* Further reduce spacing in navbar */
+    }
+    .btn {
+        width: 100%; /* Make buttons full width */
+        margin-bottom: 10px; /* Add margin between stacked buttons */
+    }
+    .social-icons a {
+        font-size: 2em; /* Reduce social icon size */
+        margin: 0 8px; /* Reduce spacing between social icons */
+    }
+}
