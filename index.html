@@ -3,14 +3,342 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mohammad Alief Hasyani - Portfolio</title>
+    <title>Mohammad Alief Hasyani | Laravel Backend Developer</title>
+    <meta name="description" content="Professional portfolio of Mohammad Alief Hasyani, Laravel Backend Developer specializing in robust web applications and RESTful APIs.">
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="styles/styles.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-  
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #34495e;
+            --text-light: #7f8c8d;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+        
+        .navbar {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 2rem;
+        }
+        
+        .nav-link {
+            color: var(--text-color);
+            font-weight: 500;
+            text-decoration: none;
+            transition: color 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary-color);
+            background-color: rgba(52, 152, 219, 0.1);
+        }
+        
+        section {
+            padding: 6rem 0;
+        }
+        
+        #home {
+            background-color: #f8f9fa;
+            padding-top: 8rem;
+        }
+        
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-weight: 700;
+            color: var(--dark-color);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        h2:after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            background-color: var(--primary-color);
+            bottom: -10px;
+            left: 25%;
+        }
+        
+        .lead {
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            padding: 0.5rem 1.5rem;
+            font-weight: 500;
+        }
+        
+        .btn-outline-primary {
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+            padding: 0.5rem 1.5rem;
+            font-weight: 500;
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .skills-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            list-style: none;
+            padding: 0;
+        }
+        
+        .skills-list li {
+            background-color: white;
+            padding: 1rem;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .skills-list li:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .skill-label {
+            font-weight: 500;
+            margin-left: 0.5rem;
+        }
+        
+        .project-card {
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .project-card img {
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .project-card .card-body {
+            display: flex;
+            flex-direction: column;
+            height: calc(100% - 200px);
+        }
+        
+        .project-card .card-text {
+            flex-grow: 1;
+        }
+        
+        .badge {
+            font-weight: 500;
+            padding: 0.4em 0.8em;
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .timeline:before {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background-color: var(--primary-color);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1px;
+        }
+        
+        .timeline-item {
+            padding: 20px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+        
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+        
+        .timeline-item:after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border: 4px solid var(--primary-color);
+            border-radius: 50%;
+            top: 30px;
+            right: -10px;
+        }
+        
+        .timeline-item:nth-child(even):after {
+            left: -10px;
+        }
+        
+        .timeline-content {
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .contact-info-container {
+            background-color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .contact-info-item {
+            padding: 1.5rem;
+        }
+        
+        .icon-container {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(52, 152, 219, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+        }
+        
+        .icon-container i {
+            color: var(--primary-color);
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(52, 152, 219, 0.1);
+            border-radius: 50%;
+            color: var(--primary-color);
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 2rem 0;
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        @media (max-width: 768px) {
+            .navbar ul {
+                gap: 1rem;
+            }
+            
+            .skills-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline:before {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+            
+            .timeline-item:after {
+                left: 21px;
+            }
+            
+            .timeline-item:nth-child(even):after {
+                left: 21px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -29,128 +357,150 @@
         <section id="home" class="fade-in"> 
             <div class="container">
                 <div class="row align-items-center">
-                    <div class="col-lg-6">
-                        <img src="images/alt.jpg" alt="Profile of Mohammad Alief Hasyani" class="profile-img">
+                    <div class="col-lg-6 text-center text-lg-start">
+                        <img src="images/alt.jpg" alt="Mohammad Alief Hasyani - Laravel Developer" class="profile-img">
                         <h1>Mohammad Alief Hasyani</h1>
-                        <p class="lead">Laravel Backend Web Developer</p>
-                        <p class="mb-4">I craft elegant, functional digital experiences with clean code and thoughtful database and backend services.</p>
+                        <p class="lead">Laravel Backend Developer</p>
+                        <p class="mb-4">Specializing in building robust web applications with clean, maintainable code and efficient database architectures.</p>
                         <div class="mt-4">
-                            <a href="#projects" class="btn btn-primary me-2">View Work</a>
-                            <a href="#contact" class="btn btn-outline-primary">Contact Me</a>
+                            <a href="#projects" class="btn btn-primary me-2">View My Work</a>
+                            <a href="#contact" class="btn btn-outline-primary">Get In Touch</a>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="ps-lg-5 mt-5 mt-lg-0">
-                            <h3 class="mt-5">Skills</h3>
-                                <ul class="skills-list">
-                                    <li>
-                                        <span class="skill-label">HTML/CSS</span>
-                                       
-                                    </li>
-                                    <li>
-                                        <span class="skill-label">Bootstrap</span>
-                                       
-                                    </li>
-                                    <li>
-                                        <span class="skill-label">PHP</span>
-                                       
-                                    </li>
-                                    <li>
-                                        <span class="skill-label">Laravel</span>
-                                
-                                    </li>
-                                    <li>
-                                        <span class="skill-label">MySQL</span>
-                                
-                                    </li>
-                                    <li>
-                                        <span class="skill-label">REST API</span>
-                                       
-                                    </li>
-                                    <li>
-                                        <span class="skill-label">Laravel Breeze</span>
-                                       
-                                    </li>
-                                    <li>
-                                        <span class="skill-label">Laravel Sanctum</span>
-                                       
-                                    </li>
-                                    <li>
-                                        <span class="skill-label">Flask</span>
-                                       
-                                    </li>
-                                </ul>
-
+                            <h3 class="mt-5 mb-4">My Skills</h3>
+                            <ul class="skills-list">
+                                <li>
+                                    <i class="fab fa-html5 text-danger"></i>
+                                    <span class="skill-label">HTML5/CSS3</span>
+                                </li>
+                                <li>
+                                    <i class="fab fa-bootstrap text-primary"></i>
+                                    <span class="skill-label">Bootstrap 5</span>
+                                </li>
+                                <li>
+                                    <i class="fab fa-php text-primary"></i>
+                                    <span class="skill-label">PHP 8+</span>
+                                </li>
+                                <li>
+                                    <i class="fab fa-js text-primary"></i>
+                                    <span class="skill-label">Javascript</span>
+                                </li>
+                                <li>
+                                    <i class="fab fa-laravel text-danger"></i>
+                                    <span class="skill-label">Laravel 11</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-database text-secondary"></i>
+                                    <span class="skill-label">MySQL</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-code text-info"></i>
+                                    <span class="skill-label">RESTful API</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-shield-alt text-success"></i>
+                                    <span class="skill-label">Laravel Breeze</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-key text-warning"></i>
+                                    <span class="skill-label">Laravel Sanctum</span>
+                                </li>
+                                <li>
+                                    <i class="fab fa-python text-info"></i>
+                                    <span class="skill-label">Flask</span>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="projects">
+        <section id="projects" class="fade-in">
             <div class="container">
-                <h2 class="text-center mb-5">My Personal Projects</h2>
+                <h2 class="text-center mb-5">Featured Projects</h2>
                 <div class="row g-4">
                     <div class="col-md-4">
-                        <div class="card project-card">
-                            <img src="images\web-app.png" class="card-img-top" alt="Trello Like Web App Screenshot">
+                        <div class="card project-card h-100">
+                            <img src="images/web-app.png" class="card-img-top" alt="Trello-like Web Application">
                             <div class="card-body">
-                                <h5 class="card-title">Trello-like Web App </h5>
-                                <p class="card-text text-muted mb-3">A course management tool with a Kanban-style interface.</p>
+                                <h5 class="card-title">Course Management System</h5>
+                                <p class="card-text text-muted mb-3">A Kanban-style task management application for organizing academic courses and assignments with drag-and-drop functionality.</p>
                                 <div class="d-flex flex-wrap gap-2 mb-3">
-                                    <span class="badge bg-primary">Laravel</span>
-                                    <span class="badge bg-info">Breeze</span>
-                                    <span class="badge bg-secondary">Blade</span>
+                                    <span class="badge bg-primary">Laravel 10</span>
+                                    <span class="badge bg-info">Breeze Auth</span>
                                     <span class="badge bg-secondary">MySQL</span>
-                                </div>
-                                <a href="https://github.com/Aliefhasyani/course-app" target="_blank" class="btn btn-sm btn-outline-primary">View Details</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card project-card">
-                            <img src="images/warships-web.png" class="card-img-top" alt="Task Manager Screenshot">
-                            <div class="card-body">
-                                <h5 class="card-title">Warshisp Web</h5>
-                                <p class="card-text text-muted mb-3">A simple CRUD website where warships enthusiast can look up their favorite warship!<br>
-                                     <strong>(If its there :])</strong></p>
-                                <div class="d-flex flex-wrap gap-2 mb-3">
-                                    <span class="badge bg-primary">Laravel</span>
-                                    <span class="badge bg-secondary">Bootstrap</span>
-                                    <span class="badge bg-secondary">MySQL</span>
-                                </div>
-                                <a href="https://github.com/Aliefhasyani/warships_web" target="_blank" class="btn btn-sm btn-outline-primary">View Details</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card project-card">
-                            <img src="images/mangadex-api.png" class="card-img-top" alt="Weather Dashboard Screenshot">
-                            <div class="card-body">
-                                <h5 class="card-title">Manga Reader</h5>
-                                <p class="card-text text-muted mb-3">A Manga reading website built using Laravel with Mangadex api <br>
-                                    <strong>(note. the manga's cover arent showing because Mangadex's api intentionally using placehorder for the cover images)</strong></p>
-                                <div class="d-flex flex-wrap gap-2 mb-3">
-                                    <span class="badge bg-primary">Laravel </span>
-                                    <span class="badge bg-secondary">API</span>
-                                  
-                                </div>
-                                <a href="https://github.com/Aliefhasyani/mangadex-api" target="_blank" class="btn btn-sm btn-outline-primary">View Details</a>
-                            </div>
-                        </div>
-                        <div class="card project-card">
-                            <img src="images/api.png" class="card-img-top" alt="Weather Dashboard Screenshot">
-                            <div class="card-body">
-                                <h5 class="card-title">API</h5>
-                                <p class="card-text text-muted mb-3">A RestfulAPI made using my Warships database that is also used in my other project<br>
                                     
-                                <div class="d-flex flex-wrap gap-2 mb-3">
-                                    <span class="badge bg-primary">Laravel </span>
-                                    <span class="badge bg-secondary">API</span>
-                                    <span class="badge bg-info">RestfulAPI</span>
-                                  
                                 </div>
-                                <a href="https://github.com/Aliefhasyani/mangadex-api" target="_blank" class="btn btn-sm btn-outline-primary">View Details</a>
+                                <a href="https://github.com/Aliefhasyani/course-app" target="_blank" class="btn btn-sm btn-outline-primary">View on GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card project-card h-100">
+                            <img src="images/warships-web.png" class="card-img-top" alt="Warships Database Web Application">
+                            <div class="card-body">
+                                <h5 class="card-title">Naval Encyclopedia</h5>
+                                <p class="card-text text-muted mb-3">A comprehensive CRUD application for naval enthusiasts to explore and contribute information about historical and modern warships.</p>
+                                <div class="d-flex flex-wrap gap-2 mb-3">
+                                    <span class="badge bg-primary">Laravel</span>
+                                    <span class="badge bg-secondary">Bootstrap 5</span>
+                                    <span class="badge bg-success">CRUD Operations</span>
+                                    
+                                </div>
+                                <a href="https://github.com/Aliefhasyani/warships_web" target="_blank" class="btn btn-sm btn-outline-primary">View on GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card project-card h-100">
+                            <img src="images/mangadex-api.png" class="card-img-top" alt="Manga Reader Application">
+                            <div class="card-body">
+                                <h5 class="card-title">Manga Reader Platform</h5>
+                                <p class="card-text text-muted mb-3">A responsive manga reading interface leveraging the Mangadex API with custom caching and user experience enhancements.</p>
+                                <div class="d-flex flex-wrap gap-2 mb-3">
+                                    <span class="badge bg-primary">Laravel</span>
+                                    <span class="badge bg-info">API Integration</span>
+                                    
+                                </div>
+                                <a href="https://github.com/Aliefhasyani/mangadex-api" target="_blank" class="btn btn-sm btn-outline-primary">View on GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            <div class="row">  
+                    <div class="col-md-4 mt-4">
+                        <div class="card project-card h-100">
+                            <img src="images/api.png" class="card-img-top" alt="Manga Reader Application">
+                            <div class="card-body">
+                                <h5 class="card-title">Warships RESTful API</h5>
+                                <p class="card-text text-muted mb-3">A custom-built API serving naval data with authentication, rate limiting, and comprehensive documentation for developers.</p>
+                                <div class="d-flex flex-wrap gap-2 mb-3">
+                                    <span class="badge bg-primary">Laravel</span>
+                                    <span class="badge bg-success">RESTful Design</span>
+                                </div>
+                                <a href="https://github.com/Aliefhasyani/sakila-restapi" target="_blank" class="btn btn-sm btn-outline-primary">View on GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4 mt-4">
+                        <div class="card project-card h-100">
+                            <img src="images/course-udemy.png" class="card-img-top" alt="Manga Reader Application">
+                            <div class="card-body">
+                                <h5 class="card-title">Udemy E-commerce</h5>
+                                <p class="card-text text-muted mb-3">A website where users can buy courses provided by Udemy API</p>
+                                <div class="d-flex flex-wrap gap-2 mb-3">
+                                    <span class="badge bg-primary">Flask</span>
+                                    <span class="badge bg-primary">Python</span>
+                                    <span class="badge bg-warning">React</span>
+                                    <span class="badge bg-warning">Javascript</span>
+                                    <span class="badge bg-info">API Integration</span>
+                                </div>
+                                <a href="https://github.com/Aliefhasyani/course_management" target="_blank" class="btn btn-sm btn-outline-primary">View on GitHub</a>
                             </div>
                         </div>
                     </div>
@@ -158,83 +508,105 @@
             </div>
         </section>
 
-        <section id="experience">
+        <section id="experience" class="fade-in">
             <div class="container">
                 <h2 class="text-center mb-5">Professional Experience</h2>
                 <div class="timeline">
                     <div class="timeline-item">
-                        <h4>I'm Trying :)</h4>
-                       
+                        <div class="timeline-content">
+                            <h4>I'm Trying :}</h4>
+                            <p class="text-muted mb-2">2023 - Present</p>
+                            <ul>
+                                <li>Developing custom Laravel applications for personal projects for 1 year</li>
+                            </ul>
+                               
+                        </div>
                     </div>
                     
                 </div>
             </div>
         </section>
 
-        <section id="education">
-    <div class="container">
-        <h2 class="text-center mb-5">Education</h2>
-        <div class="row justify-content-center g-4">
-            <div class="col-md-8 col-lg-6">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <h4 class="card-title">System Informatics Student</h4>
-                        <h5 class="card-subtitle text-primary mb-2">Universitas Hasanuddin</h5>
-                        <p class="text-muted mb-3">2023 - Present</p>
-                        <p>Graduated with a focus on web development and database systems. Completed a final project on a distributed task management system.</p>
+        <section id="education" class="fade-in">
+            <div class="container">
+                <h2 class="text-center mb-5">Education & Training</h2>
+                <div class="row justify-content-center g-4">
+                    <div class="col-md-8 col-lg-6">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="icon-container me-3">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="card-title mb-0">Bachelor of System Informatics</h4>
+                                        <h5 class="card-subtitle text-primary">Universitas Hasanuddin</h5>
+                                    </div>
+                                </div>
+                                <p class="text-muted mb-3">2023 - Present</p>
+                                <p>Focusing on Backend Web Development using Laravel's ecosystem and MySQL</p>
+                             
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
+        </section>
 
-
-        <section id="contact">
+        <section id="contact" class="fade-in">
             <div class="container">
-                <h2 class="text-center mb-5">Get In Touch</h2>
+                <h2 class="text-center mb-5">Let's Connect</h2>
                 <div class="row justify-content-center">
-                    <div class="col-lg-8">
+                    <div class="col-lg-10">
                         <div class="contact-info-container p-4 rounded">
                             <div class="row">
                                 <div class="col-md-4 text-center mb-4 mb-md-0">
                                     <div class="contact-info-item">
                                         <div class="icon-container mb-3">
-                                            <i class="fas fa-map-marker-alt fa-2x"></i>
+                                            <i class="fas fa-map-marker-alt"></i>
                                         </div>
                                         <h5 class="mb-2">Location</h5>
                                         <p class="text-muted mb-0">JL. Nurussamawati 4</p>
-                                        <p class="text-muted mb-0">Parepare, Sulawesi Selatan</p>
+                                        <p class="text-muted">Parepare, South Sulawesi, Indonesia</p>
                                     </div>
                                 </div>
                                 <div class="col-md-4 text-center mb-4 mb-md-0">
                                     <div class="contact-info-item">
                                         <div class="icon-container mb-3">
-                                            <i class="fas fa-phone fa-2x"></i>
+                                            <i class="fas fa-phone"></i>
                                         </div>
                                         <h5 class="mb-2">Phone</h5>
-                                        <p class="text-muted">08114120051</p>
-                                        <p class="text-muted mb-3">WhatsApp</p>
+                                        <p class="text-muted">+62 811 4120 051</p>
+                                        <p class="text-muted">Available on WhatsApp</p>
                                     </div>
                                 </div>
                                 <div class="col-md-4 text-center">
                                     <div class="contact-info-item">
                                         <div class="icon-container mb-3">
-                                            <i class="fas fa-envelope fa-2x"></i>
+                                            <i class="fas fa-envelope"></i>
                                         </div>
                                         <h5 class="mb-2">Email</h5>
                                         <p class="text-muted">aliefhasyani@gmail.com</p>
+                                        <p class="text-muted">Typically responds within 24 hours</p>
                                     </div>
                                 </div>
                             </div>
                         
-                            <div class="text-center mt-5">
-                                <h4 class="mb-4">Connect With Me</h4>
-                                <div class="social-icons">
-                                    <a href="https://github.com/Aliefhasyani" target="_blank" aria-label="GitHub Profile" class="mx-2"><i class="fab fa-github"></i></a>
-                                    <a href="https://instagram.com/yourusername" target="_blank" aria-label="Instagram Profile" class="mx-2"><i class="fab fa-instagram"></i></a>
-                                    <a href="https://wa.me/628114120051" target="_blank" aria-label="WhatsApp" class="mx-2"><i class="fab fa-whatsapp"></i></a>
-                                    <a href="https://www.linkedin.com/in/yourusername" target="_blank" aria-label="LinkedIn Profile" class="mx-2"><i class="fab fa-linkedin"></i></a>
+                            <div class="text-center mt-5 pt-4">
+                                <h4 class="mb-4">Professional Profiles</h4>
+                                <div class="social-icons d-flex justify-content-center gap-3">
+                                    <a href="https://github.com/Aliefhasyani" target="_blank" aria-label="GitHub Profile" title="GitHub">
+                                        <i class="fab fa-github"></i>
+                                    </a>
+                                    <a href="https://linkedin.com/in/yourprofile" target="_blank" aria-label="LinkedIn Profile" title="LinkedIn">
+                                        <i class="fab fa-linkedin-in"></i>
+                                    </a>
+                                    <a href="https://wa.me/628114120051" target="_blank" aria-label="WhatsApp" title="WhatsApp">
+                                        <i class="fab fa-whatsapp"></i>
+                                    </a>
+                                    <a href="mailto:aliefhasyani@gmail.com" aria-label="Email" title="Email">
+                                        <i class="fas fa-envelope"></i>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -244,15 +616,54 @@
         </section>
     </main>
 
-    <footer>
+    <footer class="fade-in">
         <div class="container text-center">
-            <p class="mb-0">&copy; 2023 Mohammad Alief Hasyani. All rights reserved.</p>
+            <p class="mb-2">&copy; <span id="year"></span> Mohammad Alief Hasyani. All rights reserved.</p>
+            <p class="mb-0 small">Built with <i class="fas fa-heart text-danger"></i> using HTML5, CSS3, and Bootstrap 5</p>
         </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+      
+            document.getElementById('year').textContent = new Date().getFullYear();
+            
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    
+                    
+                    document.querySelectorAll('.nav-link').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                });
+            });
+            
+            
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.fade-in').forEach(section => {
+                observer.observe(section);
+            });
+            
+           
             const sections = document.querySelectorAll('section');
             const navLinks = document.querySelectorAll('.nav-link');
             
@@ -263,8 +674,7 @@
                     const sectionTop = section.offsetTop;
                     const sectionHeight = section.clientHeight;
                     
-         
-                    if (window.scrollY >= (sectionTop - 150)) { 
+                    if (window.scrollY >= (sectionTop - 150)) {
                         current = section.getAttribute('id');
                     }
                 });
@@ -277,35 +687,8 @@
                 });
             }
             
-          
-            setActiveLink();
-            
-          
             window.addEventListener('scroll', setActiveLink);
-
-           
-            const observerOptions = {
-                root: null, 
-                rootMargin: '0px',
-                threshold: 0.1 
-            };
-
-            const sectionObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('fade-in');
-                     
-                    } else {
-                        
-                    }
-                });
-            }, observerOptions);
-
-            sections.forEach(section => {
-                sectionObserver.observe(section);
-            });
-            
-     
+            setActiveLink();
         });
     </script>
 </body>
