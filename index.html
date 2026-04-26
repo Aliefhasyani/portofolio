@@ -1,888 +1,430 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mohammad Alief Hasyani | Fullstack Developer</title>
     <meta name="description" content="Professional portfolio of Mohammad Alief Hasyani, Laravel Backend Developer specializing in robust web applications and RESTful APIs.">
     
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        accent: '#4f46e5',
+                        accentHover: '#4338ca', 
+                    }
+                }
+            }
+        }
+    </script>
+
     <style>
-        /* Import Google Font - Inter */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-
-        /* Define Color Variables for easy customization */
-        :root {
-            /* Primary Accent Color: A deep, professional forest green */
-            --primary-color: #1a7a4c; /* Dark Green */
-            --primary-hover-color: #145e3b; /* Slightly darker green for hover states */
-
-            /* Text Colors */
-            --text-color: #343a40; /* Dark Charcoal - for main body text, good readability */
-            --heading-color: #212529; /* Even darker for headings, strong contrast */
-            --muted-text-color: #6c757d; /* Soft Gray - for secondary text like descriptions, dates */
-
-            /* Background Colors */
-            --light-bg: #f5f7f9; /* Very light subtle gray, for alternating section backgrounds */
-            --white-bg: #ffffff; /* Pure white, for primary section backgrounds and cards */
-
-            /* Border & Separator Colors */
-            --border-color: #e2e6e9; /* Light gray for subtle borders and timeline lines */
-
-            /* Shadow Colors */
-            --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.04); /* Very subtle shadow for a clean lift */
-            --shadow-hover: 0 8px 20px rgba(0, 0, 0, 0.08); /* Slightly more pronounced on hover */
-        }
-
-        /* Base Styles: Apply to the entire body for consistent typography and background */
-        body {
-            font-family: 'Inter', sans-serif; /* Use the imported Inter font */
-            line-height: 1.6; /* Standard line height for readability */
-            color: var(--text-color); /* Apply the main text color */
-            background-color: var(--light-bg); /* Use the light background color for the overall page */
-            scroll-behavior: smooth; /* Enable smooth scrolling when navigating to anchor links */
-            overflow-x: hidden; /* Prevent horizontal scrollbars, especially important for animations */
-        }
-
-        /* Headings: Consistent styling for all heading levels */
-        h1, h2, h3, h4, h5, h6 {
-            color: var(--heading-color); /* Apply the darker heading color */
-            font-weight: 700; /* Bold font weight for emphasis */
-            margin-bottom: 1rem; /* Standard bottom margin */
-        }
-
-        /* Specific font sizes for different heading levels */
-        h1 { font-size: 2.8rem; }
-        h2 { font-size: 2.2rem; }
-        h3 { font-size: 1.8rem; }
-        h4 { font-size: 1.5rem; }
-
-        /* Navbar Styling: Fixed at the top with subtle shadow */
-        .navbar {
-            background-color: var(--white-bg); /* White background for a clean look */
-            box-shadow: var(--shadow-light); /* Subtle shadow for depth */
-            padding: 1rem 0; /* Vertical padding */
-            position: sticky; /* Makes the navbar stick to the top when scrolling */
-            top: 0; /* Position at the very top */
-            z-index: 1000; /* Ensure navbar stays on top of other content */
-        }
-
-        .navbar ul {
-            list-style: none; /* Remove bullet points from list items */
-            padding: 0; /* Remove default padding */
-            margin: 0; /* Remove default margin */
-            display: flex; /* Use flexbox for horizontal layout */
-            justify-content: center; /* Center the navigation links */
-        }
-
-        .navbar li {
-            margin: 0 20px; /* Horizontal spacing between list items */
-        }
-
-        .navbar .nav-link {
-            color: var(--text-color); /* Default link color */
-            text-decoration: none; /* Remove underline */
-            font-weight: 500; /* Medium font weight */
-            padding: 0.5rem 0; /* Vertical padding for click area */
-            position: relative; /* Needed for the underline animation */
-            transition: color 0.3s ease; /* Smooth color transition on hover */
-        }
-
-        /* Underline effect for navigation links (pseudo-element) */
-        .navbar .nav-link::after {
-            content: ''; /* Required for pseudo-elements */
-            position: absolute; /* Position relative to the parent link */
-            width: 0; /* Start with no width */
-            height: 2px; /* Thickness of the underline */
-            background-color: var(--primary-color); /* Color of the underline */
-            left: 50%; /* Start from the center */
-            bottom: -5px; /* Position below the text */
-            transform: translateX(-50%); /* Center the underline */
-            transition: width 0.3s ease; /* Smooth width transition for the animation */
-        }
-
-        /* Hover state for navigation links */
-        .navbar .nav-link:hover {
-            color: var(--primary-color); /* Change color on hover */
-        }
-
-        /* Expand underline on hover and for the active link */
-        .navbar .nav-link:hover::after,
-        .navbar .nav-link.active::after {
-            width: 100%; /* Expand underline to full width */
-        }
-
-        /* Active state for the current section's navigation link */
-        .navbar .nav-link.active {
-            color: var(--primary-color); /* Primary color for active link */
-            font-weight: 600; /* Slightly bolder for active link */
-        }
-
-        /* Section Styling: Common properties for all content sections */
-        section {
-            padding: 100px 0; /* Generous vertical padding for visual separation */
-            opacity: 0; /* Initially hidden for fade-in animation */
-            transform: translateY(20px); /* Initially moved down for slide-up effect */
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out; /* Smooth animation properties */
-        }
-
-        /* Class added by JavaScript when section enters viewport for animation */
-        section.fade-in {
-            opacity: 1; /* Fully visible */
-            transform: translateY(0); /* Return to original position */
-        }
-
-        /* Home Section: Hero area with profile image and introduction */
-        #home {
-            background-color: var(--white-bg); /* White background for a crisp look */
-            padding-top: 150px; /* Extra padding to account for fixed navbar */
-            padding-bottom: 100px;
-        }
-
-        #home .profile-img {
-            width: 200px; /* Fixed width */
-            height: 200px; /* Fixed height */
-            border-radius: 50%; /* Make the image circular */
-            object-fit: cover; /* Ensure image covers the area without distortion */
-            border: 5px solid var(--primary-color); /* Primary color border around the image */
-            box-shadow: var(--shadow-hover); /* More pronounced shadow for the profile image */
-            margin-bottom: 30px; /* Space below the image */
-        }
-
-        #home h1 {
-            font-size: 3.2rem; /* Larger font size for the main name */
-            font-weight: 800; /* Extra bold for strong impact */
-            line-height: 1.2; /* Slightly tighter line height for large text */
-        }
-
-        #home .lead {
-            font-size: 1.4rem; /* Larger font for the lead paragraph (role) */
-            color: var(--primary-color); /* Primary color for the role text */
-            font-weight: 600; /* Bolder font weight */
-            margin-bottom: 25px; /* Space below the lead text */
-        }
-
-        #home p {
-            font-size: 1.1rem; /* Standard paragraph font size */
-            color: var(--muted-text-color); /* Muted text color for general paragraphs */
-        }
-
-        /* Button Styling: Consistent look for all buttons */
-        .btn {
-            padding: 12px 28px; /* Vertical and horizontal padding */
-            border-radius: 6px; /* Slightly rounded corners */
-            font-weight: 600; /* Bolder text */
-            transition: all 0.3s ease; /* Smooth transitions for all properties */
-            text-transform: uppercase; /* Uppercase text for a professional touch */
-            letter-spacing: 0.5px; /* Slight letter spacing */
-        }
-
-        .btn-primary {
-            background-color: var(--primary-color); /* Primary background color */
-            border-color: var(--primary-color); /* Primary border color */
-            color: var(--white-bg); /* White text color */
-        }
-
-        .btn-primary:hover {
-            background-color: var(--primary-hover-color); /* Darker primary color on hover */
-            border-color: var(--primary-hover-color); /* Darker border color on hover */
-            transform: translateY(-2px); /* Slight lift effect on hover */
-            box-shadow: 0 5px 15px rgba(0,0,0,0.15); /* More prominent shadow on hover */
-        }
-
-        .btn-outline-primary {
-            color: var(--primary-color); /* Primary text color for outline buttons */
-            border-color: var(--primary-color); /* Primary border color for outline buttons */
-            background-color: transparent; /* Transparent background */
-        }
-
-        .btn-outline-primary:hover {
-            background-color: var(--primary-color); /* Primary background color on hover */
-            color: var(--white-bg); /* White text color on hover */
-            transform: translateY(-2px); /* Slight lift effect on hover */
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* Subtle shadow on hover */
-        }
-
-        /* List-Based Skills Styling */
-        .skills-list {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            list-style: none;
-            padding: 0;
-            margin-top: 1.5rem;
-        }
-
-        .skills-list li {
-            display: flex;
-            align-items: center;
-            padding: 12px 18px;
-            background-color: var(--white-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            box-shadow: var(--shadow-light);
-            font-weight: 500;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .skills-list li:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .skills-list .skill-label {
-            font-size: 1rem;
-            color: var(--text-color);
-            margin-left: 0.8rem;
-        }
-
-        .skill-icon {
-            font-size: 1.2rem;
-            width: 20px;
-            text-align: center;
-        }
-        
-        .skill-icon img {
-            width: 20px;
-            height: 20px;
-            object-fit: contain;
-        }
-
-        /* Projects Section Styling */
-        #projects {
-            background-color: var(--light-bg); /* Light background for this section */
-        }
-
-        .project-card {
-            border: none; /* Remove default card borders */
-            border-radius: 10px; /* Rounded corners for the cards */
-            overflow: hidden; /* Hide content that overflows rounded corners */
-            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions for hover effects */
-            height: 100%; /* Ensure all cards in a row have the same height */
-            background-color: var(--white-bg); /* White background for the cards */
-            box-shadow: var(--shadow-light); /* Subtle shadow for depth */
-        }
-
-        .project-card:hover {
-            transform: translateY(-8px); /* Lift the card significantly on hover */
-            box-shadow: var(--shadow-hover); /* More pronounced shadow on hover */
-        }
-
-        .project-card .card-img-top {
-            height: 200px; /* Fixed height for project images */
-            object-fit: cover; /* Ensure images cover the area without distortion */
+        ::-webkit-scrollbar {
+            width: 8px;
         }
-
-        .project-card .card-body {
-            padding: 25px; /* Padding inside the card body */
-            display: flex;
-            flex-direction: column;
-        }
-
-        .project-card .card-title {
-            font-size: 1.35rem; /* Font size for project titles */
-            font-weight: 600; /* Bolder font weight */
-            margin-bottom: 10px; /* Space below the title */
-        }
-
-        .project-card .card-text {
-            font-size: 0.95rem; /* Font size for project descriptions */
-            color: var(--muted-text-color); /* Muted text color for descriptions */
-            flex-grow: 1;
-        }
-
-        .badge {
-            padding: 7px 12px; /* Padding for badges */
-            font-weight: 500; /* Medium font weight */
-            border-radius: 5px; /* Rounded corners for badges */
-            font-size: 0.85em; /* Smaller font size relative to parent */
-            text-transform: uppercase; /* Uppercase text for badges */
-        }
-        .badge.bg-primary {
-            background-color: var(--primary-color) !important; /* Apply primary color to primary badges */
-        }
-        .badge.bg-secondary {
-            background-color: var(--muted-text-color) !important; /* Apply muted text color to secondary badges */
-        }
-        .badge.bg-info {
-            background-color: #17a2b8 !important;
-            color: white;
-        }
-
-        /* Experience Section Styling (Timeline) */
-        #experience {
-            background-color: var(--white-bg); /* White background for this section */
-        }
-
-        .timeline {
-            position: relative; /* Needed for positioning the ::before pseudo-element */
-            max-width: 900px; /* Maximum width for the timeline container */
-            margin: 0 auto; /* Center the timeline */
-            padding-left: 40px; /* Space for the vertical timeline line */
-        }
-
-        /* Vertical line for the timeline */
-        .timeline::before {
-            content: ''; /* Required for pseudo-elements */
-            position: absolute; /* Position relative to the timeline container */
-            left: 15px; /* Position of the line */
-            top: 0;
-            bottom: 0;
-            width: 2px; /* Thickness of the line */
-            background: var(--border-color); /* Color of the line */
-        }
-
-        .timeline-item {
-            position: relative; /* Needed for positioning the ::before pseudo-element */
-            margin-bottom: 40px; /* Space between timeline items */
-            padding: 25px; /* Padding inside each timeline item */
-            background-color: var(--white-bg); /* White background for items */
-            border-radius: 10px; /* Rounded corners */
-            box-shadow: var(--shadow-light); /* Subtle shadow */
-            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effects */
-        }
-
-        .timeline-item:hover {
-            transform: translateY(-5px); /* Slight lift on hover */
-            box-shadow: var(--shadow-hover); /* More pronounced shadow on hover */
-        }
-
-        /* Dot icon for each timeline item */
-        .timeline-item::before {
-            content: ''; /* Required for pseudo-elements */
-            position: absolute; /* Position relative to the timeline item */
-            left: -33px; /* Adjust to align with the main timeline line */
-            top: 30px; /* Vertical position of the dot */
-            width: 16px; /* Size of the dot */
-            height: 16px; /* Size of the dot */
-            border-radius: 50%; /* Make it circular */
-            background: var(--primary-color); /* Primary color for the dot */
-            border: 4px solid var(--white-bg); /* White ring around the dot */
-            z-index: 1;
-        }
-
-        .timeline-item h4 {
-            font-size: 1.3rem; /* Font size for job titles */
-            margin-bottom: 5px; /* Space below title */
-        }
-
-        .timeline-item h5 {
-            font-size: 1.1rem; /* Font size for company names */
-            color: var(--primary-color); /* Primary color for company names */
-            margin-bottom: 10px; /* Space below company name */
-        }
-
-        .timeline-item p.timeline-date {
-            color: var(--muted-text-color); /* Muted text color for dates */
-            font-size: 0.95rem; /* Smaller font size */
-            margin-bottom: 10px;
-        }
-
-        .timeline-item ul {
-            list-style-type: disc; /* Use disc bullets for list items */
-            padding-left: 20px; /* Indent list items */
-            margin-top: 15px; /* Space above the list */
-            color: var(--text-color); /* Standard text color for list items */
-            margin-bottom: 0;
-        }
-
-        .timeline-item ul li {
-            margin-bottom: 8px; /* Space between list items */
-        }
-
-        /* Education Section Styling */
-        #education {
-            background-color: var(--light-bg); /* Light background for this section */
-        }
-
-        #education .card {
-            border: none; /* Remove default card borders */
-            border-radius: 10px; /* Rounded corners */
-            box-shadow: var(--shadow-light); /* Subtle shadow */
-            background-color: var(--white-bg); /* White background for cards */
-            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effects */
-            height: 100%; /* Ensure cards are same height */
-        }
-
-        #education .card:hover {
-            transform: translateY(-5px); /* Slight lift on hover */
-            box-shadow: var(--shadow-hover); /* More pronounced shadow on hover */
-        }
-
-        #education .card-body {
-            padding: 30px; /* Padding inside card body */
-        }
-
-        #education .card-title {
-            font-size: 1.4rem; /* Font size for degree titles */
-            font-weight: 600; /* Bolder font weight */
-        }
-
-        #education .card-subtitle {
-            font-size: 1.1rem; /* Font size for institution names */
-            color: var(--primary-color) !important; /* Primary color for institution names */
-        }
-
-        #education .card p {
-            color: var(--muted-text-color); /* Muted text color for descriptions */
-            font-size: 0.95rem; /* Smaller font size */
-        }
-
-        /* Contact Section Styling */
-        #contact {
-            background-color: var(--white-bg); /* White background for this section */
-        }
-
-        .contact-info-container {
-            background-color: var(--light-bg); /* Light background for the contact info box */
-            border-radius: 10px; /* Rounded corners */
-            box-shadow: var(--shadow-light); /* Subtle shadow */
-            padding: 40px; /* Padding inside the container */
-        }
-
-        .contact-info-item {
-            padding: 20px; /* Padding inside each contact info item */
-            transition: transform 0.3s ease; /* Smooth lift on hover */
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9; 
         }
-
-        .contact-info-item:hover {
-            transform: translateY(-5px); /* Slight lift on hover */
-        }
-
-        .icon-container {
-            width: 70px; /* Fixed width */
-            height: 70px; /* Fixed height */
-            margin: 0 auto 20px auto; /* Center the icon and add bottom margin */
-            display: flex; /* Use flexbox to center the icon inside */
-            align-items: center; /* Center vertically */
-            justify-content: center; /* Center horizontally */
-            background-color: rgba(26, 122, 76, 0.1); /* Light transparent primary color background */
-            border-radius: 50%; /* Make it circular */
-            color: var(--primary-color); /* Primary color for the icon itself */
-        }
-
-        .icon-container .fa-2x {
-            font-size: 2.2em; /* Slightly larger icons */
-        }
-
-        .contact-info-item h5 {
-            font-size: 1.25rem; /* Font size for contact headings (e.g., "Location") */
-            margin-bottom: 8px; /* Space below heading */
-            color: var(--heading-color); /* Darker color for these headings */
-        }
-
-        .contact-info-item p {
-            margin-bottom: 5px; /* Space between contact details */
-            color: var(--muted-text-color); /* Muted text color for contact details */
-            font-size: 0.95rem; /* Smaller font size */
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 4px;
         }
-
-        .social-icons a {
-            color: var(--text-color); /* Default color for social icons */
-            transition: color 0.3s ease, transform 0.3s ease; /* Smooth transitions for hover effects */
-            display: inline-block; /* Allows transform properties */
-            font-size: 2.5em; /* Larger social icons */
-            margin: 0 12px; /* Horizontal spacing between icons */
-        }
-
-        .social-icons a:hover {
-            color: var(--primary-color); /* Primary color on hover */
-            transform: translateY(-5px); /* Lift effect on hover */
-        }
-
-        /* Footer Styling */
-        footer {
-            background-color: #212529; /* Very dark gray for the footer background */
-            color: var(--light-bg); /* Light text color for contrast */
-            padding: 25px 0; /* Vertical padding */
-            font-size: 0.9rem; /* Smaller font size */
-            text-align: center; /* Center the text */
-        }
-
-        /* Media Queries for Responsiveness: Adjust styles for different screen sizes */
-
-        /* Large devices (desktops, 992px and up) */
-        @media (max-width: 992px) {
-            #home .col-lg-6:first-child {
-                text-align: center; /* Center text in the first column of home section */
-            }
-            #home .ps-lg-5 {
-                padding-left: 0 !important; /* Remove left padding on smaller screens */
-                text-align: center; /* Center text in the second column of home section */
-                margin-top: 50px !important; /* Add top margin if content is stacked */
-            }
-            .profile-img {
-                margin: 0 auto 30px auto; /* Center the profile image */
-            }
-            .btn {
-                width: auto; /* Allow buttons to size naturally */
-                display: inline-block; /* Ensure buttons display inline */
-            }
-            .timeline {
-                padding-left: 15px; /* Adjust timeline padding for smaller screens */
-            }
-            .timeline::before {
-                left: 0; /* Align timeline line to the left edge */
-            }
-            .timeline-item::before {
-                left: -22px; /* Adjust dot position to align with the new line position */
-                top: 28px; /* Adjust vertical position of the dot */
-            }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
         }
 
-        /* Medium devices (tablets, 768px and up) */
-        @media (max-width: 768px) {
-            h1 { font-size: 2.2rem; } /* Adjust heading sizes */
-            h2 { font-size: 1.8rem; }
-            section { padding: 80px 0; } /* Reduce section padding */
-            .navbar li { margin: 0 10px; } /* Reduce spacing in navbar */
-            .contact-info-item { margin-bottom: 30px; } /* Add bottom margin for stacked contact items */
-            .contact-info-item:last-child { margin-bottom: 0; } /* Remove margin from the last item */
-            
-            .skills-list {
-                grid-template-columns: 1fr;
-            }
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
-        /* Small devices (phones, 576px and up) */
-        @media (max-width: 576px) {
-            .navbar ul {
-                flex-wrap: wrap; /* Allow navigation links to wrap to the next line */
-                gap: 10px; /* Add gap between wrapped items */
-            }
-            .navbar li {
-                margin: 0 5px; /* Further reduce spacing in navbar */
-            }
-            .btn {
-                width: 100%; /* Make buttons full width */
-                margin-bottom: 10px; /* Add margin between stacked buttons */
-            }
-            .social-icons a {
-                font-size: 2em; /* Reduce social icon size */
-                margin: 0 8px; /* Reduce spacing between social icons */
-            }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
-<body>
+<body class="bg-slate-50 text-slate-900 font-sans antialiased selection:bg-accent selection:text-white">
 
-    <nav class="navbar">
-        <ul>
-            <li><a href="#home" class="nav-link active">Home</a></li>
-            <li><a href="#projects" class="nav-link">Projects</a></li>
-            <li><a href="#experience" class="nav-link">Experience</a></li>
-            <li><a href="#education" class="nav-link">Education</a></li>
-            <li><a href="#contact" class="nav-link">Contact</a></li>
-        </ul>
+    <nav class="fixed w-full top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200 transition-all duration-300" id="navbar">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#home" class="text-xl font-bold tracking-tighter text-slate-900 hover:text-accent transition-colors">MAH.</a>
+            
+            <button class="md:hidden text-slate-600 hover:text-slate-900 focus:outline-none" id="mobile-menu-btn">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+
+            <ul class="hidden md:flex space-x-8 text-sm font-medium text-slate-600">
+                <li><a href="#home" class="nav-link hover:text-accent transition-colors relative pb-1">Home</a></li>
+                <li><a href="#projects" class="nav-link hover:text-accent transition-colors relative pb-1">Projects</a></li>
+                <li><a href="#experience" class="nav-link hover:text-accent transition-colors relative pb-1">Experience</a></li>
+                <li><a href="#education" class="nav-link hover:text-accent transition-colors relative pb-1">Education</a></li>
+                <li><a href="#contact" class="nav-link hover:text-accent transition-colors relative pb-1">Contact</a></li>
+            </ul>
+        </div>
+
+        <div class="md:hidden hidden bg-white border-b border-slate-100 absolute w-full" id="mobile-menu">
+            <ul class="flex flex-col px-6 py-4 space-y-4 text-sm font-medium text-slate-600 shadow-xl">
+                <li><a href="#home" class="block hover:text-accent mobile-link">Home</a></li>
+                <li><a href="#projects" class="block hover:text-accent mobile-link">Projects</a></li>
+                <li><a href="#experience" class="block hover:text-accent mobile-link">Experience</a></li>
+                <li><a href="#education" class="block hover:text-accent mobile-link">Education</a></li>
+                <li><a href="#contact" class="block hover:text-accent mobile-link">Contact</a></li>
+            </ul>
+        </div>
     </nav>
 
-    <main>
-        <section id="home" class="fade-in"> 
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-6 text-center text-lg-start">
-                        <img src="images/me.jpg" alt="Mohammad Alief Hasyani - Laravel Developer" class="profile-img">
-                        <h1>Mohammad Alief Hasyani</h1>
-                        <p class="lead">Fullstack Web Developer</p>
-                        <p class="mb-4">Specializing in building robust and stylish web applications with clean, maintainable code and efficient database architectures.</p>
-                        <div class="mt-4">
-                            <a href="#projects" class="btn btn-primary me-2">View My Work</a>
-                            <a href="#contact" class="btn btn-outline-primary">Get In Touch</a>
-                        </div>
+    <main class="pt-24">
+        <section id="home" class="min-h-[85vh] flex items-center pt-12 pb-20 px-6 max-w-6xl mx-auto reveal"> 
+            <div class="flex flex-col-reverse md:flex-row items-center gap-12 md:gap-20 w-full">
+                <div class="flex-1 text-center md:text-left">
+                    <p class="text-accent font-semibold tracking-wide text-sm uppercase mb-3">Portfolio</p>
+                    <h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-slate-900 mb-6 leading-tight">
+                        Mohammad <br/>Alief Hasyani
+                    </h1>
+                    <p class="text-xl text-slate-500 mb-8 max-w-lg mx-auto md:mx-0 font-light">
+                        Fullstack Web Developer specializing in building robust, interactive applications and efficient RESTful APIs.
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4">
+                        <a href="#projects" class="w-full sm:w-auto px-8 py-3 bg-slate-900 text-white rounded-lg font-medium hover:bg-accent transition-all duration-300 shadow-lg hover:shadow-accent/30 hover:-translate-y-1">
+                            View My Work
+                        </a>
+                        <a href="#contact" class="w-full sm:w-auto px-8 py-3 bg-white text-slate-900 border border-slate-200 rounded-lg font-medium hover:border-slate-400 hover:bg-slate-50 transition-all duration-300">
+                            Get In Touch
+                        </a>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="ps-lg-5 mt-5 mt-lg-0">
-                            <h3 class="mt-5 mb-4">My Skills</h3>
-                            <ul class="skills-list">
-                                <li>
-                                    <div class="skill-icon"><i class="fab fa-html5 text-danger"></i></div>
-                                    <span class="skill-label">HTML5/CSS3</span>
-                                </li>
-                                <li>
-                                    <div class="skill-icon"><i class="fab fa-bootstrap text-primary"></i></div>
-                                    <span class="skill-label">Bootstrap 5</span>
-                                </li>
-                                <li>
-                                    <div class="skill-icon"><i class="fab fa-php text-primary"></i></div>
-                                    <span class="skill-label">PHP 8+</span>
-                                </li>
-                                <li>
-                                    <div class="skill-icon"><i class="fab fa-js text-warning"></i></div>
-                                    <span class="skill-label">Javascript</span>
-                                </li>
-                                <li>
-                                    <div class="skill-icon"><i class="fab fa-laravel text-danger"></i></div>
-                                    <span class="skill-label">Laravel 11</span>
-                                </li>
-                                <li>
-                                    <div class="skill-icon"><i class="fab fa-react text-info"></i></div>
-                                    <span class="skill-label">ReactJS</span>
-                                </li>
-                                <li>
-                                    <div class="skill-icon"><i class="fas fa-database text-secondary"></i></div>
-                                    <span class="skill-label">MySQL</span>
-                                </li>
-                                <li>
-                                    <div class="skill-icon"><i class="fas fa-code text-info"></i></div>
-                                    <span class="skill-label">RESTful API</span>
-                                </li>
-                                <li>
-                                    <div class="skill-icon"><img src="postman.png" alt="Postman icon"></div>
-                                    <span class="skill-label">Postman</span>
-                                </li>
-                                <li>
-                                    <div class="skill-icon"><img src="thunder-client.jpg" alt="Thunder Client icon"></div>
-                                    <span class="skill-label">Thunder Client</span>
-                                </li>
-                                <li>
-                                    <div class="skill-icon"><i class="fas fa-shield-alt text-success"></i></div>
-                                    <span class="skill-label">Laravel Breeze</span>
-                                </li>
-                                <li>
-                                    <div class="skill-icon"><i class="fas fa-key text-warning"></i></div>
-                                    <span class="skill-label">Laravel Sanctum</span>
-                                </li>
-                                <li>
-                                    <div class="skill-icon"><i class="fab fa-python text-info"></i></div>
-                                    <span class="skill-label">Flask</span>
-                                </li>
-                            </ul>
-                        </div>
+                </div>
+
+                <div class="flex-1 flex justify-center md:justify-end relative">
+                    <div class="absolute inset-0 bg-accent/5 rounded-full blur-3xl scale-110 -z-10"></div>
+                    <div class="w-64 h-64 md:w-80 md:h-80 rounded-3xl overflow-hidden shadow-2xl border-4 border-white rotate-3 hover:rotate-0 transition-transform duration-500 bg-slate-200">
+                        <img src="images/me.jpg" alt="Mohammad Alief Hasyani" class="w-full h-full object-cover">
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="projects" class="fade-in">
-            <div class="container">
-                <h2 class="text-center mb-5">My Projects</h2>
-                <div class="row g-4 justify-content-center"> 
-                    <div class="col-md-5 mt-4">
-                        <div class="card project-card h-100">
-                            <img src="images/diro.png" class="card-img-top" alt="Diro Reservation App">
-                            <div class="card-body">
-                                <h5 class="card-title">DIRO App</h5>
-                                <p class="card-text mb-3">An online platform and reservation app for booking badminton courts smoothly and efficiently.</p>
-                                <div class="d-flex flex-wrap gap-2 mb-4 mt-auto">
-                                    <span class="badge bg-primary">Laravel</span>
-                                    <span class="badge bg-primary">React.js</span>
-                                    <span class="badge bg-info">Inertia.js</span>
-                                </div>
-                                <div>
-                                    <a href="https://diro.my.id/" target="_blank" class="btn btn-sm btn-outline-primary mb-2">View Online</a>
-                                    <a href="https://github.com/Aliefhasyani/diro-app" target="_blank" class="btn btn-sm btn-outline-primary mb-2">View on GitHub</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-5 mt-4">
-                        <div class="card project-card h-100">
-                            <img src="images/rapid-api.png" class="card-img-top" alt="Addresses RESTful API">
-                            <div class="card-body">
-                                <h5 class="card-title">Addresses RESTful API</h5>
-                                <p class="card-text mb-3">A public data API deployed for third-party use, specifically designed for Addresses, States, Cities, and Countries.</p>
-                                <div class="d-flex flex-wrap gap-2 mb-4 mt-auto">
-                                    <span class="badge bg-primary">Laravel</span>
-                                    <span class="badge bg-primary">RESTful API</span>
-                                </div>
-                                <div>
-                                    <a href="https://rapidapi.com/aliefhasyani05/api/fooopi1/playground/apiendpoint_a021f96a-ea2c-44c0-a144-78f4cdde9b32" target="_blank" class="btn btn-sm btn-outline-primary mb-2">View Online</a>
-                                    <a href="https://github.com/Aliefhasyani/fooopi" target="_blank" class="btn btn-sm btn-outline-primary mb-2">View on GitHub</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <section class="py-20 bg-white border-y border-slate-100 reveal">
+            <div class="max-w-6xl mx-auto px-6 text-center">
+                <p class="text-sm font-medium text-slate-400 uppercase tracking-widest mb-8">Tech Stack & Tools</p>
+                <div class="flex flex-wrap justify-center gap-3 md:gap-4 max-w-4xl mx-auto">
+                    <span class="px-4 py-2 bg-slate-50 border border-slate-200 text-slate-700 rounded-full text-sm font-medium flex items-center gap-2 hover:border-accent hover:text-accent transition-colors"><i class="fab fa-html5"></i> HTML/CSS</span>
+                    <span class="px-4 py-2 bg-slate-50 border border-slate-200 text-slate-700 rounded-full text-sm font-medium flex items-center gap-2 hover:border-accent hover:text-accent transition-colors"><i class="fab fa-bootstrap"></i> Bootstrap 5</span>
+                    <span class="px-4 py-2 bg-slate-50 border border-slate-200 text-slate-700 rounded-full text-sm font-medium flex items-center gap-2 hover:border-accent hover:text-accent transition-colors"><i class="fab fa-php"></i> PHP 8+</span>
+                    <span class="px-4 py-2 bg-slate-50 border border-slate-200 text-slate-700 rounded-full text-sm font-medium flex items-center gap-2 hover:border-accent hover:text-accent transition-colors"><i class="fab fa-js"></i> JavaScript</span>
+                    <span class="px-4 py-2 bg-slate-50 border border-slate-200 text-slate-700 rounded-full text-sm font-medium flex items-center gap-2 hover:border-accent hover:text-accent transition-colors"><i class="fab fa-laravel"></i> Laravel 11</span>
+                    <span class="px-4 py-2 bg-slate-50 border border-slate-200 text-slate-700 rounded-full text-sm font-medium flex items-center gap-2 hover:border-accent hover:text-accent transition-colors"><i class="fab fa-react"></i> ReactJS</span>
+                    <span class="px-4 py-2 bg-slate-50 border border-slate-200 text-slate-700 rounded-full text-sm font-medium flex items-center gap-2 hover:border-accent hover:text-accent transition-colors"><i class="fas fa-database"></i> MySQL</span>
+                    <span class="px-4 py-2 bg-slate-50 border border-slate-200 text-slate-700 rounded-full text-sm font-medium flex items-center gap-2 hover:border-accent hover:text-accent transition-colors"><i class="fas fa-code"></i> REST API</span>
+                    <span class="px-4 py-2 bg-slate-50 border border-slate-200 text-slate-700 rounded-full text-sm font-medium flex items-center gap-2 hover:border-accent hover:text-accent transition-colors"><i class="fas fa-shield-alt"></i> Breeze & Sanctum</span>
+                    <span class="px-4 py-2 bg-slate-50 border border-slate-200 text-slate-700 rounded-full text-sm font-medium flex items-center gap-2 hover:border-accent hover:text-accent transition-colors"><i class="fab fa-python"></i> Flask</span>
                 </div>
             </div>
         </section>
 
-        <section id="experience" class="fade-in">
-            <div class="container">
-                <h2 class="text-center mb-5">Experience</h2>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <h4>Fullstack Developer Intern</h4>
-                        <h5>PT Sinergi Inovasi Tekno (Sintech)</h5>
-                        <p class="timeline-date">December 2025 - April 2026</p>
-                      
+        <section id="projects" class="py-24 px-6 max-w-6xl mx-auto reveal">
+            <div class="mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Selected Works</h2>
+                <div class="w-16 h-1 bg-accent rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="group bg-white rounded-2xl border border-slate-100 overflow-hidden hover:shadow-2xl hover:shadow-slate-200 transition-all duration-500 hover:-translate-y-2 flex flex-col">
+                    <div class="h-56 bg-slate-100 overflow-hidden relative">
+                        <img src="images/sertifikat.png" alt="Diro App" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500 bg-slate-200">
                     </div>
-                    <div class="timeline-item">
-                        <h4>Fullstack Developer Intern</h4>
-                        <h5>PT Special Skill Indonesia</h5>
-                        <p class="timeline-date">December 2025 - February 2026</p>
+                    <div class="p-8 flex flex-col flex-1">
+                        <h3 class="text-2xl font-bold text-slate-900 mb-3 group-hover:text-accent transition-colors">Certificate Lookup</h3>
+                        <p class="text-slate-500 mb-6 flex-1 font-light leading-relaxed">Special Skills main feature for certificate management and certificate searching</p>
                         
-                    </div>
-                    <div class="timeline-item">
-                        <h4>Freelance / Personal Projects</h4>
-                        <h5>Self-Employed</h5>
-                        <p class="timeline-date">2023 - Present</p>
-                        <ul>
-                            <li>Developing custom Laravel applications for personal projects and expanding expertise in robust backend architectures.</li>
-                        </ul>   
-                    </div>    
-                </div>
-            </div>
-        </section>
+                        <div class="flex flex-wrap gap-2 mb-8">
+                            <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-medium rounded-md">Laravel</span>
+                            <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-medium rounded-md">Laravel Filament</span>
+                            <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-medium rounded-md">MySQL</span>
+                            <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-medium rounded-md">Google Sheets API</span>
+                        </div>
 
-        <section id="education" class="fade-in">
-            <div class="container">
-                <h2 class="text-center mb-5">Education</h2>
-                <div class="row justify-content-center g-4">
-                    <div class="col-md-8 col-lg-6">
-                        <div class="card h-100 border-0 shadow-sm">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center mb-3">
-                                    <div class="icon-container me-3 mb-0" style="width: 50px; height: 50px;">
-                                        <i class="fas fa-graduation-cap fa-lg"></i>
-                                    </div>
-                                    <div>
-                                        <h4 class="card-title mb-0">Bachelor of Information Systems</h4>
-                                        <h5 class="card-subtitle mt-1" style="color: var(--primary-color);">Universitas Hasanuddin</h5>
-                                    </div>
-                                </div>
-                                <p class="text-muted mb-3 fw-bold">2023 - Present</p>
-                                <p class="mb-0">Focusing on Fullstack Web Development using Laravel, MySQL, and React.js while utilizing Inertia.js.</p>
-                            </div>
+                        <div class="flex items-center gap-4">
+                            <a href="https://sertifikat.specialskill.id/sertifikat" target="_blank" class="text-sm font-semibold text-slate-900 hover:text-accent transition-colors flex items-center gap-2">
+                                Live Demo <i class="fas fa-arrow-right"></i>
+                            </a>
+                     
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
 
-        <section id="contact" class="fade-in">
-            <div class="container">
-                <h2 class="text-center mb-5">Let's Connect</h2>
-                <div class="row justify-content-center">
-                    <div class="col-lg-10">
-                        <div class="contact-info-container">
-                            <div class="row">
-                                <div class="col-md-4 text-center mb-4 mb-md-0">
-                                    <div class="contact-info-item">
-                                        <div class="icon-container">
-                                            <i class="fas fa-map-marker-alt fa-2x"></i>
-                                        </div>
-                                        <h5>Location</h5>
-                                        <p class="text-muted mb-0">JL. Nurussamawati 4</p>
-                                        <p class="text-muted">Parepare, South Sulawesi, Indonesia</p>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 text-center mb-4 mb-md-0">
-                                    <div class="contact-info-item">
-                                        <div class="icon-container">
-                                            <i class="fas fa-phone fa-2x"></i>
-                                        </div>
-                                        <h5>Phone</h5>
-                                        <p class="text-muted mb-0">+62 811 4120 051</p>
-                                        <p class="text-muted">Available on WhatsApp</p>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 text-center">
-                                    <div class="contact-info-item">
-                                        <div class="icon-container">
-                                            <i class="fas fa-envelope fa-2x"></i>
-                                        </div>
-                                        <h5>Email</h5>
-                                        <p class="text-muted mb-0">aliefhasyani@gmail.com</p>
-                                        <p class="text-muted">Typically responds within 24 hours</p>
-                                    </div>
-                                </div>
-                            </div>
+                <div class="group bg-white rounded-2xl border border-slate-100 overflow-hidden hover:shadow-2xl hover:shadow-slate-200 transition-all duration-500 hover:-translate-y-2 flex flex-col">
+                    <div class="h-56 bg-slate-100 overflow-hidden relative">
+                        <img src="images/sintech.png" alt="Addresses API" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500 bg-slate-200">
+                    </div>
+                    <div class="p-8 flex flex-col flex-1">
+                        <h3 class="text-2xl font-bold text-slate-900 mb-3 group-hover:text-accent transition-colors">Sintech Solutions</h3>
+                        <p class="text-slate-500 mb-6 flex-1 font-light leading-relaxed">HR Jobseeker platform for Companies</p>
                         
-                            <div class="text-center mt-5 pt-4">
-                                <h4 class="mb-4">Professional Profiles</h4>
-                                <div class="social-icons d-flex justify-content-center gap-3">
-                                    <a href="https://github.com/Aliefhasyani" target="_blank" aria-label="GitHub Profile" title="GitHub">
-                                        <i class="fab fa-github"></i>
-                                    </a>
-                                    <a href="https://www.linkedin.com/in/mohammad-alief-hasyani-980a47202/" target="_blank" aria-label="LinkedIn Profile" title="LinkedIn">
-                                        <i class="fab fa-linkedin-in"></i>
-                                    </a>
-                                    <a href="https://wa.me/628114120051" target="_blank" aria-label="WhatsApp" title="WhatsApp">
-                                        <i class="fab fa-whatsapp"></i>
-                                    </a>
-                                    <a href="mailto:aliefhasyani05@gmail.com" aria-label="Email" title="Email">
-                                        <i class="fas fa-envelope"></i>
-                                    </a>
-                                </div>
-                            </div>
+                        <div class="flex flex-wrap gap-2 mb-8">
+                            <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-medium rounded-md">Laravel</span>
+                            <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-medium rounded-md">Blade Template</span>
+                            <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-medium rounded-md">Tailwind</span>
+                        </div>
+
+                        <div class="flex items-center gap-4">
+                            <a href="https://rapidapi.com/aliefhasyani05/api/fooopi1/playground/apiendpoint_a021f96a-ea2c-44c0-a144-78f4cdde9b32" target="_blank" class="text-sm font-semibold text-slate-900 hover:text-accent transition-colors flex items-center gap-2">
+                                Live Demo <i class="fas fa-arrow-right"></i>
+                            </a>
+                            <a href="https://github.com/Aliefhasyani/fooopi" target="_blank" class="text-slate-400 hover:text-slate-900 transition-colors">
+                                <i class="fab fa-github text-xl"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
+                <div class="group bg-white rounded-2xl border border-slate-100 overflow-hidden hover:shadow-2xl hover:shadow-slate-200 transition-all duration-500 hover:-translate-y-2 flex flex-col">
+                    <div class="h-56 bg-slate-100 overflow-hidden relative">
+                        <img src="images/api.png" alt="Addresses API" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500 bg-slate-200">
+                    </div>
+                    <div class="p-8 flex flex-col flex-1">
+                        <h3 class="text-2xl font-bold text-slate-900 mb-3 group-hover:text-accent transition-colors">Foopi RESTful API</h3>
+                        <p class="text-slate-500 mb-6 flex-1 font-light leading-relaxed">A public data API deployed for third-party use, specifically designed for Addresses, States, Cities, and Countries.</p>
+                        
+                        <div class="flex flex-wrap gap-2 mb-8">
+                            <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-medium rounded-md">Laravel</span>
+                            <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-medium rounded-md">RESTful API</span>
+                            <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-medium rounded-md">RapidAPI</span>
+                            <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-medium rounded-md">MySQL</span>
+                        </div>
+
+                        <div class="flex items-center gap-4">
+                            <a href="https://rapidapi.com/aliefhasyani05/api/fooopi1/playground/apiendpoint_a021f96a-ea2c-44c0-a144-78f4cdde9b32" target="_blank" class="text-sm font-semibold text-slate-900 hover:text-accent transition-colors flex items-center gap-2">
+                                Live Demo <i class="fas fa-arrow-right"></i>
+                            </a>
+                            <a href="https://github.com/Aliefhasyani/fooopi" target="_blank" class="text-slate-400 hover:text-slate-900 transition-colors">
+                                <i class="fab fa-github text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="group bg-white rounded-2xl border border-slate-100 overflow-hidden hover:shadow-2xl hover:shadow-slate-200 transition-all duration-500 hover:-translate-y-2 flex flex-col">
+                    <div class="h-56 bg-slate-100 overflow-hidden relative">
+                        <img src="images/main-company.png" alt="Addresses API" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500 bg-slate-200">
+                    </div>
+                    <div class="p-8 flex flex-col flex-1">
+                        <h3 class="text-2xl font-bold text-slate-900 mb-3 group-hover:text-accent transition-colors">Sintech </h3>
+                        <p class="text-slate-500 mb-6 flex-1 font-light leading-relaxed">PT.Sinergi Inovasi Teknologi Company main page</p>
+                        
+                        <div class="flex flex-wrap gap-2 mb-8">
+                            <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-medium rounded-md">Laravel</span>
+                            <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-medium rounded-md">Tailwind</span>
+                            <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-medium rounded-md">Javascrip</span>
+                     
+                        </div>
+
+                        <div class="flex items-center gap-4">
+                            <a href="https://rapidapi.com/aliefhasyani05/api/fooopi1/playground/apiendpoint_a021f96a-ea2c-44c0-a144-78f4cdde9b32" target="_blank" class="text-sm font-semibold text-slate-900 hover:text-accent transition-colors flex items-center gap-2">
+                                Live Demo <i class="fas fa-arrow-right"></i>
+                            </a>
+                            <a href="https://github.com/Aliefhasyani/fooopi" target="_blank" class="text-slate-400 hover:text-slate-900 transition-colors">
+                                <i class="fab fa-github text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-24 bg-white border-y border-slate-100 reveal">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                    
+                    <div id="experience">
+                        <div class="mb-10 flex items-center gap-4">
+                            <div class="w-12 h-12 bg-accent/10 text-accent rounded-xl flex items-center justify-center text-xl">
+                                <i class="fas fa-briefcase"></i>
+                            </div>
+                            <h2 class="text-3xl font-bold text-slate-900">Experience</h2>
+                        </div>
+                        
+                        <div class="space-y-8 relative before:absolute before:inset-0 before:ml-2 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-slate-200">
+                            
+                            <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                                <div class="flex items-center justify-center w-5 h-5 rounded-full border-4 border-white bg-accent shadow shrink-0 ml-[-9px] md:ml-0 md:absolute md:left-1/2 md:-translate-x-1/2"></div>
+                                <div class="w-[calc(100%-2rem)] md:w-[calc(50%-2rem)] p-6 rounded-2xl bg-slate-50 border border-slate-100 group-hover:border-accent/30 transition-colors">
+                                    <span class="text-xs font-semibold text-accent tracking-wide uppercase">Dec 2025 - Apr 2026</span>
+                                    <h4 class="text-lg font-bold text-slate-900 mt-2">Fullstack Developer Intern</h4>
+                                    <p class="text-slate-500 font-medium text-sm">PT Sinergi Inovasi Tekno (Sintech)</p>
+                                </div>
+                            </div>
+
+                            <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                                <div class="flex items-center justify-center w-5 h-5 rounded-full border-4 border-white bg-slate-300 group-hover:bg-accent shadow shrink-0 ml-[-9px] md:ml-0 md:absolute md:left-1/2 md:-translate-x-1/2 transition-colors"></div>
+                                <div class="w-[calc(100%-2rem)] md:w-[calc(50%-2rem)] p-6 rounded-2xl bg-slate-50 border border-slate-100 group-hover:border-accent/30 transition-colors">
+                                    <span class="text-xs font-semibold text-slate-500 tracking-wide uppercase">Dec 2025 - Feb 2026</span>
+                                    <h4 class="text-lg font-bold text-slate-900 mt-2">Fullstack Developer Intern</h4>
+                                    <p class="text-slate-500 font-medium text-sm">PT Special Skill Indonesia</p>
+                                </div>
+                            </div>
+
+                            <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                                <div class="flex items-center justify-center w-5 h-5 rounded-full border-4 border-white bg-slate-300 group-hover:bg-accent shadow shrink-0 ml-[-9px] md:ml-0 md:absolute md:left-1/2 md:-translate-x-1/2 transition-colors"></div>
+                                <div class="w-[calc(100%-2rem)] md:w-[calc(50%-2rem)] p-6 rounded-2xl bg-slate-50 border border-slate-100 group-hover:border-accent/30 transition-colors">
+                                    <span class="text-xs font-semibold text-slate-500 tracking-wide uppercase">2023 - Present</span>
+                                    <h4 class="text-lg font-bold text-slate-900 mt-2">Freelance Projects</h4>
+                                    <p class="text-slate-500 font-medium text-sm mb-3">Self-Employed</p>
+                                    <p class="text-sm text-slate-600 font-light leading-relaxed">Developing custom Laravel applications and expanding expertise in robust backend architectures.</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div id="education">
+                        <div class="mb-10 flex items-center gap-4">
+                            <div class="w-12 h-12 bg-slate-900 text-white rounded-xl flex items-center justify-center text-xl">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <h2 class="text-3xl font-bold text-slate-900">Education</h2>
+                        </div>
+
+                        <div class="p-8 rounded-3xl bg-slate-50 border border-slate-100 hover:shadow-lg hover:border-slate-200 transition-all duration-300">
+                            <div class="flex justify-between items-start mb-6">
+                                <div>
+                                    <h4 class="text-xl font-bold text-slate-900">Bachelor of Information Systems</h4>
+                                    <p class="text-accent font-semibold mt-1">Universitas Hasanuddin</p>
+                                </div>
+                                <span class="px-3 py-1 bg-white border border-slate-200 text-slate-600 text-xs font-bold rounded-full">2023 - Present</span>
+                            </div>
+                            <p class="text-slate-600 font-light leading-relaxed">
+                                Focusing on Fullstack Web Development using modern technologies including Laravel, MySQL, and React.js while utilizing Inertia.js for seamless SPA experiences.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="py-24 px-6 max-w-4xl mx-auto text-center reveal">
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-6">Let's Connect</h2>
+            <p class="text-slate-500 mb-12 max-w-xl mx-auto font-light text-lg">Currently available for freelance projects and full-time roles. If you have an exciting project, feel free to reach out.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+                <div class="p-8 rounded-2xl bg-white border border-slate-100 hover:border-accent hover:shadow-xl transition-all duration-300 group">
+                    <div class="w-12 h-12 mx-auto bg-slate-50 rounded-full flex items-center justify-center text-slate-600 group-hover:bg-accent group-hover:text-white transition-colors mb-4">
+                        <i class="fas fa-map-marker-alt text-lg"></i>
+                    </div>
+                    <h5 class="font-bold text-slate-900 mb-1">Location</h5>
+                    <p class="text-sm text-slate-500">Parepare, South Sulawesi<br>Indonesia</p>
+                </div>
+
+                <a href="https://wa.me/628114120051" target="_blank" class="p-8 rounded-2xl bg-white border border-slate-100 hover:border-accent hover:shadow-xl transition-all duration-300 group block">
+                    <div class="w-12 h-12 mx-auto bg-slate-50 rounded-full flex items-center justify-center text-slate-600 group-hover:bg-accent group-hover:text-white transition-colors mb-4">
+                        <i class="fab fa-whatsapp text-lg"></i>
+                    </div>
+                    <h5 class="font-bold text-slate-900 mb-1">WhatsApp</h5>
+                    <p class="text-sm text-slate-500">+62 811 4120 051<br></p>
+                </a>
+
+                <a href="mailto:aliefhasyani05@gmail.com" class="p-8 rounded-2xl bg-white border border-slate-100 hover:border-accent hover:shadow-xl transition-all duration-300 group block">
+                    <div class="w-12 h-12 mx-auto bg-slate-50 rounded-full flex items-center justify-center text-slate-600 group-hover:bg-accent group-hover:text-white transition-colors mb-4">
+                        <i class="fas fa-envelope text-lg"></i>
+                    </div>
+                    <h5 class="font-bold text-slate-900 mb-1">Email</h5>
+                    <p class="text-sm text-slate-500">aliefhasyani@gmail.com<br></p>
+                </a>
+            </div>
+
+            <div class="flex justify-center gap-6">
+                <a href="https://github.com/Aliefhasyani" target="_blank" class="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 hover:bg-slate-900 hover:text-white transition-all duration-300 hover:-translate-y-1">
+                    <i class="fab fa-github text-xl"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/mohammad-alief-hasyani-980a47202/" target="_blank" class="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 hover:bg-[#0077b5] hover:text-white transition-all duration-300 hover:-translate-y-1">
+                    <i class="fab fa-linkedin-in text-xl"></i>
+                </a>
             </div>
         </section>
     </main>
 
-    <footer class="fade-in">
-        <div class="container text-center">
-            <p class="mb-2">&copy; <span id="year"></span> Mohammad Alief Hasyani. All rights reserved.</p>
-            <p class="mb-0 small">Built with <i class="fas fa-heart text-danger"></i> using HTML5, CSS3, and Bootstrap 5</p>
+    <footer class="bg-slate-900 text-slate-400 py-8 border-t border-slate-800">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-sm font-light">
+            <p> <span id="year"></span></p>
+            <!-- <p class="mt-4 md:mt-0 flex items-center gap-2">
+                Built with <i class="fas fa-heart text-accent"></i> & Tailwind CSS
+            </p> -->
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-      
+        document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('year').textContent = new Date().getFullYear();
-            
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                    
-                    document.querySelectorAll('.nav-link').forEach(link => {
-                        link.classList.remove('active');
-                    });
-                    this.classList.add('active');
+
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+
+            mobileBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
                 });
             });
-            
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
+
+            const revealElements = document.querySelectorAll('.reveal');
+            const revealOptions = {
+                threshold: 0.15,
+                rootMargin: "0px 0px -50px 0px"
             };
 
-            const observer = new IntersectionObserver((entries) => {
+            const revealOnScroll = new IntersectionObserver(function(entries, observer) {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
+                    if (!entry.isIntersecting) return;
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target); 
                 });
-            }, observerOptions);
+            }, revealOptions);
 
-            document.querySelectorAll('.fade-in').forEach(section => {
-                observer.observe(section);
-            });
-            
+            revealElements.forEach(el => revealOnScroll.observe(el));
+
             const sections = document.querySelectorAll('section');
             const navLinks = document.querySelectorAll('.nav-link');
-            
-            function setActiveLink() {
+            const navbar = document.getElementById('navbar');
+
+            window.addEventListener('scroll', () => {
                 let current = '';
                 
+                if(window.scrollY > 50) {
+                    navbar.classList.add('shadow-sm');
+                } else {
+                    navbar.classList.remove('shadow-sm');
+                }
+
                 sections.forEach(section => {
                     const sectionTop = section.offsetTop;
-                    const sectionHeight = section.clientHeight;
-                    
-                    if (window.scrollY >= (sectionTop - 150)) {
+                    if (window.scrollY >= (sectionTop - 200)) {
                         current = section.getAttribute('id');
                     }
                 });
-                
+
                 navLinks.forEach(link => {
-                    link.classList.remove('active');
+                    link.classList.remove('text-accent', 'font-semibold');
+                    link.style.borderBottom = "none";
+                    
                     if (link.getAttribute('href') === `#${current}`) {
-                        link.classList.add('active');
+                        link.classList.add('text-accent', 'font-semibold');
                     }
                 });
-            }
-            
-            window.addEventListener('scroll', setActiveLink);
-            setActiveLink();
+            });
         });
     </script>
 </body>
